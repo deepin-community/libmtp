@@ -1,2 +1,3 @@
-version=3
-http://sf.net/libmtp/libmtp-(.*).tar.gz
+version=4
+opts=filenamemangle=s/.+\/v?(\d\S+)\.tar\.gz/libmtp-$1\.tar\.gz/ \
+  https://github.com/libmtp/libmtp/tags .*/v?(\d\S+)\.tar\.gz
