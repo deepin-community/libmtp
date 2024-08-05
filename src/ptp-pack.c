@@ -213,6 +213,9 @@ ptp_pack_string(PTPParams *params, char *string, unsigned char* data, uint16_t o
 	char *ucs2strp = (char *) ucs2str;
 	size_t convlen = strlen(string);
 
+	if (convlen > PTP_MAXSTRLEN) {
+		convlen = PTP_MAXSTRLEN;
+	}
 	/* Cannot exceed 255 (PTP_MAXSTRLEN) since it is a single byte, duh ... */
 	memset(ucs2strp, 0, sizeof(ucs2str));  /* XXX: necessary? */
 #if defined(HAVE_ICONV) && defined(HAVE_LANGINFO_H)
@@ -229,7 +232,9 @@ ptp_pack_string(PTPParams *params, char *string, unsigned char* data, uint16_t o
 #endif
 	{
 		unsigned int i;
-
+		if (convlen > PTP_MAXSTRLEN) {
+			convlen = PTP_MAXSTRLEN;
+		}
 		for (i=0;i<convlen;i++) {
 			ucs2str[i] = string[i];
 		}
@@ -818,7 +823,7 @@ ptp_unpack_OI (PTPParams *params, unsigned char* data, PTPObjectInfo *oi, unsign
 							\
 	if (n >= UINT_MAX/sizeof(val->a.v[0]))		\
 		return 0;				\
-	if (n > (total - (*offset))/sizeof(val->a.v[0]))\
+	if (n > (total - (*offset))/sizeof(val->a.v[0].member))\
 		return 0;				\
 	val->a.count = n;				\
 	val->a.v = malloc(sizeof(val->a.v[0])*n);	\

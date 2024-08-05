@@ -209,7 +209,6 @@ static mtpdevice_list_t *append_to_mtpdevice_list(mtpdevice_list_t *devlist,
  * of USB MTP devices
  * @param devlist dynamic linked list of pointers to usb devices with MTP
  * properties.
- * @return nothing
  */
 static void free_mtpdevice_list(mtpdevice_list_t *devlist)
 {
@@ -748,7 +747,7 @@ void dump_usbinfo(PTP_USB *ptp_usb)
   LIBMTP_INFO("         Vendor: %s\n", ptp_usb->rawdevice.device_entry.vendor);
   LIBMTP_INFO("         Vendor id: 0x%04x\n", ptp_usb->rawdevice.device_entry.vendor_id);
   LIBMTP_INFO("         Product: %s\n", ptp_usb->rawdevice.device_entry.product);
-  LIBMTP_INFO("         Vendor id: 0x%04x\n", ptp_usb->rawdevice.device_entry.product_id);
+  LIBMTP_INFO("         Product id: 0x%04x\n", ptp_usb->rawdevice.device_entry.product_id);
   LIBMTP_INFO("         Device flags: 0x%08x\n", ptp_usb->rawdevice.device_entry.device_flags);
   (void) probe_device_descriptor(dev, stdout);
 }
@@ -1278,7 +1277,10 @@ ptp_usb_sendreq (PTPParams* params, PTPContainer* req, int dataphase)
 	usbreq.payload.params.param5=htod32(req->Param5);
 	/* send it to responder */
 	towrite = PTP_USB_BULK_REQ_LEN-(sizeof(uint32_t)*(5-req->Nparam));
-	ptp_init_send_memory_handler (&memhandler, (unsigned char*)&usbreq, towrite);
+	ret = ptp_init_send_memory_handler (&memhandler, (unsigned char*)&usbreq, towrite);
+	if (ret != PTP_RC_OK) {
+		return ret;
+	}
 	ret=ptp_write_func(
 		towrite,
 		&memhandler,
@@ -1341,7 +1343,10 @@ ptp_usb_senddata (PTPParams* params, PTPContainer* ptp,
 		if (gotlen != datawlen)
 			return PTP_RC_GeneralError;
 	}
-	ptp_init_send_memory_handler (&memhandler, (unsigned char *)&usbdata, wlen);
+	ret = ptp_init_send_memory_handler (&memhandler, (unsigned char *)&usbdata, wlen);
+	if (ret != PTP_RC_OK) {
+		return ret;
+	}
 	/* send first part of data */
 	ret = ptp_write_func(wlen, &memhandler, params->data, &written);
 	ptp_exit_send_memory_handler (&memhandler);
