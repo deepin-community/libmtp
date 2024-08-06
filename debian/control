@@ -3,7 +3,7 @@ Maintainer: Alessio Treglia <alessio@debian.org>
 Uploaders: Dylan Aïssi <daissi@debian.org>
 Section: libs
 Priority: optional
-Build-Depends: dpkg-dev (>= 1.22.5), autoconf,
+Build-Depends: autoconf,
                automake,
                chrpath,
                debhelper-compat (= 13),
@@ -20,10 +20,7 @@ Vcs-Git: https://salsa.debian.org/debian/libmtp.git
 Homepage: https://libmtp.sourceforge.net/
 Rules-Requires-Root: no
 
-Package: libmtp9t64
-Provides: ${t64:Provides}
-Replaces: libmtp9
-Breaks: libmtp9 (<< ${source:Version})
+Package: libmtp9
 Architecture: any
 Multi-Arch: same
 Depends: libmtp-common,
@@ -58,10 +55,10 @@ Description: Media Transfer Protocol (MTP) common files
 Package: libmtp-runtime
 Architecture: linux-any
 Depends: libmtp-common,
-         libmtp9t64 (= ${binary:Version}),
+         libmtp9 (= ${binary:Version}),
          ${misc:Depends},
          ${shlibs:Depends}
-Enhances: libmtp9t64
+Enhances: libmtp9
 Description: Media Transfer Protocol (MTP) runtime tools
  libmtp is a library for communicating with MTP aware devices in POSIX
  compliant operating systems.  It implements MTP Basic, the subset
@@ -79,7 +76,7 @@ Package: libmtp-dev
 Architecture: any
 Multi-Arch: same
 Section: libdevel
-Depends: libmtp9t64 (= ${binary:Version}),
+Depends: libmtp9 (= ${binary:Version}),
          libusb-1.0-0-dev,
          ${misc:Depends}
 Description: Media Transfer Protocol (MTP) development files
@@ -114,7 +111,7 @@ Architecture: any
 Section: utils
 Depends: ${misc:Depends},
          ${shlibs:Depends}
-Enhances: libmtp9t64
+Enhances: libmtp9
 Description: Media Transfer Protocol (MTP) library tools
  libmtp is a library for communicating with MTP aware devices in POSIX
  compliant operating systems.  It implements MTP Basic, the subset
