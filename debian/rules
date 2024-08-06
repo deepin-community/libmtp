@@ -75,7 +75,7 @@ endif
 override_dh_installdeb-arch:
 	# Remove rpath from the library
 	chrpath --delete \
-		$(debdir)/libmtp$(SOVERSION)t64/usr/lib/$(DEB_HOST_MULTIARCH)/libmtp.so.*.*
+		$(debdir)/libmtp$(SOVERSION)/usr/lib/$(DEB_HOST_MULTIARCH)/libmtp.so.*.*
 	# Remove rpath from programs
 	chrpath --delete $(debdir)/mtp-tools/usr/bin/*
 	dh_installdeb
