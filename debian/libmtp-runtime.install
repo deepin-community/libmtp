@@ -1,1 +1,1 @@
-lib/udev/mtp-probe
+${env:deb_udevdir}/mtp-probe

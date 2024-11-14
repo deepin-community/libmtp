@@ -5,8 +5,9 @@ Description: Fix cross build from source
  all. Since cross builds are arch-only, we don't actually need to do
  this. So all that is needed to make libmtp cross buildable is skipping
  these calls.
+Forwarded: https://github.com/libmtp/libmtp/pull/178
 Author: Helmut Grohne <helmut@subdivi.de>
-Bug: https://bugs.debian.org/971516
+Bug-Debian: https://bugs.debian.org/971516
 Last-Update: 2020-09-30
 
 --- a/Makefile.am

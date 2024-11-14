@@ -1,3 +1,67 @@
+libmtp (1.1.21-4) unstable; urgency=medium
+
+  [ Helmut Grohne ]
+  * Fix FTCBFS: Configure only once for the host architecture.
+    (Closes: #1067710)
+
+  [ Dylan Aïssi ]
+  * Improve DEP3 header
+
+ -- Dylan Aïssi <daissi@debian.org>  Mon, 21 Oct 2024 14:55:08 +0200
+
+libmtp (1.1.21-3.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Rename libraries for 64-bit time_t transition.  Closes: #1062451
+
+ -- Benjamin Drung <bdrung@debian.org>  Wed, 28 Feb 2024 14:18:19 +0000
+
+libmtp (1.1.21-3) unstable; urgency=medium
+
+  * Delete files with dh_clean (Closes: #1049296)
+  * Build-Deps: switch from pkg-config to pkgconf
+  * Drop d/README.source and d/get-git-source.sh, not relevant anymore
+  * Drop debian/*.in files to simplify packaging
+  * Drop unused definition of debver
+  * Fix permissions of debian/sanitize-manpage.pl
+  * Simplify how the recommend on udev is defined
+
+ -- Dylan Aïssi <daissi@debian.org>  Tue, 09 Jan 2024 20:51:19 +0100
+
+libmtp (1.1.21-2) experimental; urgency=medium
+
+  [ Chris Hofstaedtler ]
+  * Use udev.pc to determine correct udev install path (Closes: #1057820)
+
+ -- Dylan Aïssi <daissi@debian.org>  Thu, 21 Dec 2023 21:04:52 +0100
+
+libmtp (1.1.21-1) unstable; urgency=medium
+
+  [ Dylan Aïssi ]
+  * New upstream version 1.1.21
+  * Run ./autogen.sh at execute_before_dh_autoreconf
+  * Update symbols file
+  * Add libmtp.la in debian/not-installed and drop override_dh_missing
+  * Standards-Version: 4.6.2 (no changes needed)
+  * Drop debian/salsa-ci.yml, no longer used
+  * Enable hardening features
+  * Update debian/copyright
+
+  [ Debian Janitor ]
+  * Use secure URI in Homepage field.
+  * Bump debhelper from old 12 to 13.
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository-Browse.
+
+ -- Dylan Aïssi <daissi@debian.org>  Thu, 20 Jul 2023 22:03:54 +0200
+
+libmtp (1.1.20-1) unstable; urgency=medium
+
+  * New upstream version
+  * Standards-Version: 4.6.1 (no changes needed)
+  * Update d/watch to target GitHub instead of SourceForge
+
+ -- Dylan Aïssi <daissi@debian.org>  Fri, 22 Jul 2022 22:41:47 +0200
+
 libmtp (1.1.19-1) unstable; urgency=medium
 
   * New upstream version
